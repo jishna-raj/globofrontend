@@ -36,7 +36,7 @@ removeCartItem(id:any){
   this.api.removeCartItemApi(id).subscribe({
     next:(res:any)=>{
       console.log(res);
-      /* this.api.getCartCount() */
+      this.api.getCartCount()
       /* alert('deleted successfully') */
        this.getCartItem() 
     },
@@ -52,7 +52,16 @@ removeCartItem(id:any){
 
 emptyCart(){
   this.api.emptyCartApi().subscribe({
-    next:(res:any)=>
+    next:(res:any)=>{
+      console.log(res);
+      this.getCartItem()
+      this.api.getCartCount()
+      
+    },
+    error:(err:any)=>{
+      console.log(err);
+      
+    }
   })
 }
 
