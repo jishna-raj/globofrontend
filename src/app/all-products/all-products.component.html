@@ -1,0 +1,54 @@
+<app-header />
+
+<div class="container-fluid mt-5 ">
+    <div id="carouselExampleSlidesOnly" class="carousel slide w-100" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvXlue5Scv6mcrgRVPo_Sutt779kZCh3ipiA&s"
+                    class="w-100" alt="..." height="450px">
+            </div>
+            <div class="carousel-item">
+                <img src="https://m.media-amazon.com/images/I/51PQhsaEcLL._AC_UF1000,1000_QL80_.jpg"
+                    class="d-block w-100" alt="..." height="450px">
+            </div>
+            <div class="carousel-item">
+                <img src="https://m.media-amazon.com/images/I/51PQhsaEcLL._AC_UF1000,1000_QL80_.jpg"
+                    class="d-block w-100" alt="..." height="450px">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- items -->
+
+    <div *ngIf="allProducts.length>0" class="row mt-5">
+        <div *ngFor="let product of allProducts" class="col-md-3 p-4">
+            <div class="card rounded-3 shadow border-0 p-2 " style="width: 100%;">
+                <img routerLink="/view-product/{{product.id}}"
+                    [src]="product.image"
+                    class="card-img-top" alt="..." height="250px">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title.slice(0,25)}}</h5>
+                    <p class="card-text">{{product.description.slice(0,80)}}.....</p>
+                    <h5 class="card-text text-center">price :<span class="text-primary fw-bold">{{product.price}}</span> </h5>
+                    <div class="d-flex justify-content-between">
+                        <a (click)="addItemToWishlist(product)" class="btn btn-outline-danger"><i class="fa-solid fa-heart"></i></a>
+                        <a (click)="addToCart(product)" class="btn btn-outline-primary"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- items not -->
+
+    <div *ngIf="allProducts.length==0" class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <img src="" alt="" width="100%">
+            <h1>Loading...</h1>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <app-footer />

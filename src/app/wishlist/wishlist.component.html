@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    <h1 class="text-danger text-center mt-5 mb-5">Wishlist</h1>
+
+    <!-- item -->
+
+    <div *ngIf="allProducts.length>0" class="row my-5">
+        <div *ngFor="let product of allProducts " class="col-md-3 p-4">
+            <div class="card rounded-3 shadow border-0 p-2 " style="width: 100%;">
+                <img routerLink="/view-product/{{product.id}}" [src]="product.image" class="card-img-top" alt="..." height="250px">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title.slice(0,60)}}</h5>
+                    <p class="card-text">{{product.description.slice(0,75)}}......</p>
+                    <h5 class="card-text text-center">price : $ {{product.price}} </h5>
+                    <div class="d-flex justify-content-between">
+                        <a (click)="removeItem(product._id)" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a (click)="addToCart(product)" class="btn btn-outline-primary"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- no item in wishlist -->
+
+    <div *ngIf="allProducts.length==0" class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 d-flex justify-content-center align-items-center flex-column my-3">
+            <img src="https://aquamarineexotic.com/adminpanel/assets/images/empty-wishlist.png" alt="no image" class="w-100">
+
+            <button routerLink="/" class="btn btn-success shadow"><i class="fa-solid fa-house"></i>  back to home </button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

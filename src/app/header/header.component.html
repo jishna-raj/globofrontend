@@ -1,0 +1,24 @@
+<nav class="navbar" style="background-color:  rgb(170, 101, 235);">
+  <div class="container-fluid p-2 px-4">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="https://cdn-icons-png.flaticon.com/512/8250/8250566.png" alt="Logo" width="70" height="60"
+        class="d-inline-block align-text-top">
+      <h3>GloboMart</h3>
+    </a>
+    <form class="d-flex" role="search" style="width: 32%;">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn rounded-5 btn-sm" type="submit" style="margin-left: -48px;"><i
+          class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    <div>
+      <button routerLink="/cart" class="btn btn-outline-primary px-4"><i class="fa-solid fa-cart-plus me-2"></i>cart<span class="badge text-bg-secondary ms-1">{{cartCount}}</span></button>
+      <button routerLink="/wishlist" class="btn btn-outline-warning mx-3"><i class="fa-solid fa-heart me-2"
+          style="color: #e2121d;"></i>wishlist <span class="badge text-bg-secondary ms-1">{{wishlistCount}}</span></button>
+
+      <button *ngIf="!token" class="btn btn-outline-danger px-3"><i class="fa-solid fa-power-off me-3"></i>logout</button>
+
+      <button *ngIf="token" class="btn btn-outline-danger px-3"><i class="fa-solid fa-user me-3"></i>{{user}}</button>
+      
+    </div>
+  </div>
+</nav>
