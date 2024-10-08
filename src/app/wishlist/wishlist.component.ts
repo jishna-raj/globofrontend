@@ -67,6 +67,7 @@ export class WishlistComponent implements OnInit {
         error:(err:any)=>{
           if(err.status == 406){
             alert(err.error)
+            this.removeItem(product._id)
           }
           else{
             alert("something went wrong")

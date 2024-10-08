@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,9 @@ export class CartComponent implements OnInit {
 
   allProduct:any = []
 
-constructor(private api:ApiService){}
+  total:any = 0
+
+constructor(private api:ApiService , private router:Router){}
 
 ngOnInit(): void {
   this.getCartItem()
@@ -22,6 +25,7 @@ getCartItem(){
     next:(res:any)=>{
       console.log(res);
       this.allProduct=res
+      this.getTotal()
       
     },
     error:(err:any)=>{
@@ -29,6 +33,14 @@ getCartItem(){
       
     }
   })
+}
+
+
+getTotal(){
+ this.total = Math.ceil(this.allProduct.map((item:any)=>item.grandTotal).reduce((n1:any,n2:any)=>n1+n2))
+
+ console.log(this.total);
+ 
 }
 
 
@@ -64,6 +76,54 @@ emptyCart(){
     }
   })
 }
+
+
+
+//increment cartItem
+
+increment(id:any){
+
+  this.api.incrementApi(id).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      this.getCartItem()
+      this.api.getCartCount()
+      
+    },error:(err:any)=>{
+      console.log(err);
+      
+    }
+  })
+
+}
+
+//increment cartItem
+
+decrement(id:any){
+
+  this.api.decrementApi(id).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      this.getCartItem()
+      this.api.getCartCount()
+      
+    },error:(err:any)=>{
+      console.log(err);
+      
+    }
+  })
+
+}
+
+
+
+checkOut(){
+  sessionStorage.setItem("total",JSON.stringify(this.total))
+  this.router.navigateByUrl('/checkout')
+  
+}
+
+
 
 
 }

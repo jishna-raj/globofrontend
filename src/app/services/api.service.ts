@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ApiService {
 
-  serverUrl = 'http://localhost:4000'
+  serverUrl = 'https://globoserver.onrender.com'
 
 
   wishlistCount = new BehaviorSubject(0)
@@ -124,6 +124,18 @@ removeCartItemApi(id: any) {
 
 emptyCartApi(){
   return this.http.delete(`${this.serverUrl}/empty-cart`,this.addTokenToHeader())
+}
+
+
+//api to  increment cart item
+
+incrementApi(id:any){
+  return this.http.get(`${this.serverUrl}/increment-cart/${id}`)
+}
+
+
+decrementApi(id:any){
+  return this.http.get(`${this.serverUrl}/decrement-cart/${id}`)
 }
 
 

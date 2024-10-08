@@ -1,43 +1,64 @@
 <app-header></app-header>
 
 <div class="container-fluid" style="margin-top: 80px;">
-    <h1 class="text-center text-danger">Delivery Address</h1>
+  <h1 class="text-center text-danger">Delivery Address</h1>
 
-    <div class="row mt-5 ">
-        <div class="col-md-1"></div>
-        <div class="col-md-5 d-flex justify-content-center">
-            <img src="https://img.freepik.com/free-vector/delivery-logo-with-bike-man-courier_1308-46728.jpg" alt="no-image" class="w-100 h-75 mt-5">
-        </div>
-        <div class="col-md-5 p-4">
+  <div class="row mt-5">
+      <div class="col-md-1"></div>
+      <div class="col-md-5 d-flex justify-content-center">
+          <img src="https://img.freepik.com/free-vector/delivery-logo-with-bike-man-courier_1308-46728.jpg" alt="Delivery logo" class="w-100 h-75 mt-5">
+      </div>
+      <div class="col-md-5 p-4">
+          <form [formGroup]="checkOutForm" class="p-5 shadow" style="background-image: linear-gradient(to left, rgb(194, 177, 177), rgb(160, 69, 53));">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="uname" formControlName="uname" id="nameInput" placeholder="Name" required>
+                  <label for="nameInput">Name</label>
+              </div>
 
-            <form class="p-5 shadow" style="background-image: linear-gradient(to left, rgb(194, 177, 177) ,rgb(160, 69, 53) );">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name">
-                    <label for="floatingInput">Name</label>
-                  </div>
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="flatInput" name="flat" formControlName="flat" placeholder="Apartment/Flat No" required>
+                  <label for="flatInput">Apartment/Flat No</label>
+              </div>
 
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name34">
-                    <label for="floatingInput">Apartment/flat:no</label>
-                  </div>
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="place" id="placeInput" placeholder="Place" formControlName="place" required>
+                  <label for="placeInput">Place</label>
+              </div>
 
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="namett">
-                    <label for="floatingInput">Place</label>
-                  </div>
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="pincodeInput" placeholder="Pincode" formControlName="pincode" name="pincode" required>
+                  <label for="pincodeInput">Pincode</label>
+              </div>
 
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="name123">
-                    <label for="floatingInput">Pincode</label>
-                  </div>
+              <div class="d-flex justify-content-between">
+                  <button type="button" (click)="cancel()" class="btn btn-warning">
+                      <i class="fa-solid fa-backward"></i> Back
+                  </button>
+                  <button type="button" (click)="confirmAddress()" class="btn btn-success">
+                      Confirm Address <i class="fa-solid fa-forward ms-2"></i>
+                  </button>
+              </div>
+          </form>
 
-                  <div class="d-flex justify-content-between">
-                    <button class="btn btn-warning"><i class="fa-solid fa-backward"></i>  Back</button>
-                    <button class="btn btn-success">Confirm address  <i class="fa-solid fa-forward ms-2"></i></button>
-                  </div>
-            </form>
-        </div>
+          <div *ngIf="confirmAddressStatus" class="mt-5">
+              <h1 class="text-center text-primary">Confirm Address</h1>
+              <h3>Name: {{ checkOutForm.value.uname }}</h3>
+              <h3>Apartment/Flat: {{ checkOutForm.value.flat }}</h3>
+              <h3>Place: {{ checkOutForm.value.place }}</h3>
+              <h3>Pincode: {{ checkOutForm.value.pincode }}</h3>
+              <h1>Grand Total: {{ grandotal }}</h1>
 
-        <div class="col-md-1"></div>
-    </div>
+              <div class="d-flex justify-content-between mt-5">
+                  <button type="button" (click)="back()" class="btn btn-warning">
+                      <i class="fa-solid fa-backward"></i> Back
+                  </button>
+                  <button class="btn btn-success ms-5">
+                      Make Payment <i class="fa-solid fa-forward ms-2"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-1"></div>
+  </div>
 </div>
+
